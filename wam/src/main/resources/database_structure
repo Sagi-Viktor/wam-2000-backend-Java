@@ -1,0 +1,22 @@
+
+Seasons Table:
+	- Id (auto generated)
+	- Name (string)
+
+
+Identifier Table:
+	- Id (auto generated)
+	- Season_id (foreign_key)
+	- Custom_id (string)
+	- License_id (string)
+	- Name (string)
+	- Species (Species_table_id)
+	- Date (string)
+	- Place (PlaceType)
+	- Usage (UsageEnum)
+
+
+Species Table:
+	- Id (auto generated)
+	- Name (string)
+

@@ -1,25 +1,33 @@
 package com.petp.wam.models;
 
 
-import com.petp.wam.models.types.Place;
 import com.petp.wam.models.types.UsageType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 
+
+@Builder
+@Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class IdentifierModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Long seasonId;
+    private SeasonModel seasonId;
     @Column(unique = true)
     private String customId;
     private String licenseId;
     private String name;
     @ManyToOne
-    private Long speciesId;
+    private SpeciesModel speciesId;
     private String date;
-    private Place place;
+    @OneToOne
+    private PlaceModel place;
     private UsageType usage;
 
 }

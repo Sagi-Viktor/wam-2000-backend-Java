@@ -1,10 +1,15 @@
 package com.petp.wam.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 
+
+@Builder
+@Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class SpeciesModel {
 
     @Id

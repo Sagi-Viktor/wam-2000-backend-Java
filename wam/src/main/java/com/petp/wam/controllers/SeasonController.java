@@ -16,11 +16,14 @@ public class SeasonController {
 
     private final SeasonService seasonService;
 
-
-
     @PostMapping("/create")
     public ResponseEntity<SeasonModel> createSeason(@RequestBody SeasonModelDTO seasonModelDTO) {
         SeasonModel season = seasonService.createSeason(seasonModelDTO.getName());
         return ResponseEntity.created(URI.create("api/seasons/"+season.getId())).body(season);
+    }
+
+    @GetMapping("/{seasonId}")
+    public ResponseEntity<SeasonModel> getSeason(@PathVariable Long seasonId) {
+        return ResponseEntity.ok(seasonService.getSeasonById(seasonId));
     }
 }

@@ -26,4 +26,11 @@ public class SeasonController {
     public ResponseEntity<SeasonModel> getSeason(@PathVariable Long seasonId) {
         return ResponseEntity.ok(seasonService.getSeasonById(seasonId));
     }
+
+    @DeleteMapping("/{seasonId}")
+    public ResponseEntity<String> deleteSeason(@PathVariable Long seasonId) {
+        seasonService.deleteSeasonById(seasonId);
+        String msg = "Season with %d deleted".formatted(seasonId);
+        return ResponseEntity.ok(msg);
+    }
 }

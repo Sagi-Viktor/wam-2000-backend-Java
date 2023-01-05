@@ -22,4 +22,9 @@ public class SeasonService {
         return seasonRepository.findById(seasonId).orElseThrow(
                 ()-> new NoSuchElementException("Season %d not found!".formatted(seasonId)));
     }
+
+    public void deleteSeasonById(Long seasonId) {
+        SeasonModel seasonModel = getSeasonById(seasonId);
+        seasonRepository.delete(seasonModel);
+    }
 }

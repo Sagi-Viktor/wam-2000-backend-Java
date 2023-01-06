@@ -1,12 +1,11 @@
 package com.petp.wam.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 
 @Builder
+@Getter
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor

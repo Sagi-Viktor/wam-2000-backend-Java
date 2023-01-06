@@ -1,13 +1,13 @@
 package com.petp.wam.controllers;
 
+import com.petp.wam.models.DTOs.TicketModelDTO;
 import com.petp.wam.models.TicketModel;
 import com.petp.wam.services.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,5 +19,11 @@ public class TicketController {
     @GetMapping("/{ticketId}")
     public ResponseEntity<TicketModel> getTicket(@PathVariable Long ticketId) {
        return ResponseEntity.ok(ticketService.getTicketById(ticketId));
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<TicketModel> createTicket(@RequestBody TicketModelDTO ticketModelDTO) {
+        TicketModel ticketModel = ticketService.createTicket(ticketModelDTO);
+        return ResponseEntity.created(URI.create("/api/ticket/%d".formatted(ticketModel.getId()))).body(ticketModel);
     }
 }

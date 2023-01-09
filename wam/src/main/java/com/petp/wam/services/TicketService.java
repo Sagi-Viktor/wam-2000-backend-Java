@@ -8,6 +8,7 @@ import com.petp.wam.repositories.PlaceRepository;
 import com.petp.wam.repositories.SpeciesRepository;
 import com.petp.wam.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,12 @@ public class TicketService {
     }
 
     public TicketModel createTicket(TicketModelDTO ticketModelDTO) {
+
+        if (isTicketWithIdAlreadyExist(ticketModelDTO.getCustomId())) {
+            throw new DataIntegrityViolationException(
+                    "Ticket with Custom-Id: %s already exist in database.".formatted(ticketModelDTO.getCustomId()));
+        }
+
         SpeciesModel speciesModel = ticketModelDTO.getSpeciesModel();
         PlaceModel placeModel = ticketModelDTO.getPlaceModel();
         SpeciesModel speciesModelFromDB = speciesRepository.findByName(speciesModel.getName()).orElseGet(() ->
@@ -52,6 +59,10 @@ public class TicketService {
                 .build();
 
         return ticketRepository.save(ticketModel);
+    }
+
+    private boolean isTicketWithIdAlreadyExist(String customId) {
+        return ticketRepository.findByCustomId(customId).isPresent();
     }
 
     public List<TicketModel> getAllTicketBySeasonId(Long seasonId) {

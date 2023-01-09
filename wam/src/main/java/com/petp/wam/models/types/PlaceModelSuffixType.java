@@ -8,5 +8,10 @@ public enum PlaceModelSuffixType {
     ROAD("-es út"),
     AREA(". körzet");
 
-    private String s;
+    private final String s;
+
+    @Override
+    public String toString() {
+        return s;
+    }
 }

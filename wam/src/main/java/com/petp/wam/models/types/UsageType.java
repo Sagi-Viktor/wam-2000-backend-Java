@@ -1,8 +1,10 @@
 package com.petp.wam.models.types;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public enum UsageType {
 
     LEADVA("leadva"),
@@ -12,5 +14,10 @@ public enum UsageType {
     MEGMARADT("megmaradt"),
     GAZOLAS("gázolás");
 
-    private String s;
+    private final String s;
+
+    @Override
+    public String toString() {
+        return s;
+    }
 }

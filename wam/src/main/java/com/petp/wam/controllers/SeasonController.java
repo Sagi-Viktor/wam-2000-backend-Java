@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,5 +33,10 @@ public class SeasonController {
         seasonService.deleteSeasonById(seasonId);
         String msg = "Season with %d deleted".formatted(seasonId);
         return ResponseEntity.ok(msg);
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<List<SeasonModelDTO>> getAllSeason() {
+        return ResponseEntity.ok(seasonService.getAllSeason());
     }
 }

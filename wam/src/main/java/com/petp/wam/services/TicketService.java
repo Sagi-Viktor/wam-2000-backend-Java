@@ -10,6 +10,7 @@ import com.petp.wam.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -51,5 +52,9 @@ public class TicketService {
                 .build();
 
         return ticketRepository.save(ticketModel);
+    }
+
+    public List<TicketModel> getAllTicketBySeasonId(Long seasonId) {
+        return ticketRepository.findAllBySeasonModel_Id(seasonId);
     }
 }

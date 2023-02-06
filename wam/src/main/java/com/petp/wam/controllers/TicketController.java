@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,5 +26,10 @@ public class TicketController {
     public ResponseEntity<TicketModel> createTicket(@RequestBody TicketModelDTO ticketModelDTO) {
         TicketModel ticketModel = ticketService.createTicket(ticketModelDTO);
         return ResponseEntity.created(URI.create("/api/ticket/%d".formatted(ticketModel.getId()))).body(ticketModel);
+    }
+
+    @GetMapping("/get-tickets-by-season/{seasonId}")
+    public ResponseEntity<List<TicketModel>> getAllTicketBySeasonId(@PathVariable long seasonId) {
+        return ResponseEntity.ok(ticketService.getAllTicketBySeasonId(seasonId));
     }
 }

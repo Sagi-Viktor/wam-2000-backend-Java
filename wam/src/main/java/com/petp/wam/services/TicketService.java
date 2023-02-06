@@ -72,4 +72,32 @@ public class TicketService {
     public void deleteTicket(long ticketId) {
         ticketRepository.deleteById(ticketId);
     }
+
+    public void editTicket(TicketModel updateModel ) {
+        TicketModel ticketModel = ticketRepository.findById(updateModel.getId())
+                .orElseThrow(NoSuchElementException::new);
+
+        SpeciesModel speciesModel = speciesRepository.findByName(updateModel.getSpeciesModel().getName())
+                .orElseThrow(NoSuchElementException::new);
+
+        PlaceModel newPlaceModel = updateModel.getPlaceModel();
+        PlaceModel placeModel = placeRepository.getPlaceModelByNumberAndPlaceModelSuffixType(
+                        newPlaceModel.getNumber(),
+                        newPlaceModel.getPlaceModelSuffixType())
+                .orElse(placeRepository.save(
+                        PlaceModel.builder()
+                                .number(newPlaceModel.getNumber())
+                                .placeModelSuffixType(newPlaceModel.getPlaceModelSuffixType())
+                                .build()));
+
+        // TODO: Mapstruct will be much nicer here
+        ticketModel.setCustomId(updateModel.getCustomId());
+        ticketModel.setLicenseId(updateModel.getLicenseId());
+        ticketModel.setName(updateModel.getName());
+        ticketModel.setSpeciesModel(speciesModel);
+        ticketModel.setDate(updateModel.getDate());
+        ticketModel.setPlaceModel(placeModel);
+        ticketModel.setUsageType(updateModel.getUsageType());
+        ticketRepository.save(ticketModel);
+    }
 }

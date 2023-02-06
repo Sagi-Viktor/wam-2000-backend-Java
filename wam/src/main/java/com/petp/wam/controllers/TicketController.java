@@ -39,4 +39,11 @@ public class TicketController {
         String msg = "Ticket with %d deleted".formatted(ticketId);
         return ResponseEntity.ok(msg);
     }
+
+    @PutMapping("/update/{ticketId}")
+    public ResponseEntity<String> updateTicket(@RequestBody TicketModel ticketModel, @PathVariable String ticketId) {
+        ticketService.editTicket(ticketModel);
+        String msg = "msg: Ticket with %d successfully updated".formatted(ticketId);
+        return ResponseEntity.ok(msg);
+    }
 }

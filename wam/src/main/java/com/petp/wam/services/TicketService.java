@@ -69,4 +69,7 @@ public class TicketService {
         return ticketRepository.findAllBySeasonModel_Id(seasonId);
     }
 
+    public void deleteTicket(long ticketId) {
+        ticketRepository.deleteById(ticketId);
+    }
 }

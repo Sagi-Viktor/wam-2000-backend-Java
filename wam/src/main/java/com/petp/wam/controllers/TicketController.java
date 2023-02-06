@@ -32,4 +32,11 @@ public class TicketController {
     public ResponseEntity<List<TicketModel>> getAllTicketBySeasonId(@PathVariable long seasonId) {
         return ResponseEntity.ok(ticketService.getAllTicketBySeasonId(seasonId));
     }
+
+    @DeleteMapping("/delete/{ticketId}")
+    public ResponseEntity<String> deleteTicket(@PathVariable long ticketId) {
+        ticketService.deleteTicket(ticketId);
+        String msg = "Ticket with %d deleted".formatted(ticketId);
+        return ResponseEntity.ok(msg);
+    }
 }

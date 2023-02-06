@@ -68,4 +68,5 @@ public class TicketService {
     public List<TicketModel> getAllTicketBySeasonId(Long seasonId) {
         return ticketRepository.findAllBySeasonModel_Id(seasonId);
     }
+
 }
